@@ -6,11 +6,11 @@ public class NodoDoble
 	private NodoDoble siguiente;
 	private NodoDoble anterior;
 	
-	public NodoDoble(musica valor,NodoDoble anterior, NodoDoble siguiente)
+	public NodoDoble(musica val,NodoDoble ante, NodoDoble sig)
 	{
-		siguiente=siguiente;
-		anterior=anterior;
-		valor=valor;
+		siguiente=sig;
+		anterior=ante;
+		valor=val;
 	}
 
 	public musica getValor() {

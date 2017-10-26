@@ -7,21 +7,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.TextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-
+	private JTextField txttipo;
+	private JTextField txtcancion;
+	private JTextField txtalbum;
+	private JTextField txtautor;
+	private JTextField txtid;
+	listadoble ld=new listadoble();
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +56,12 @@ public class Menu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+
+		TextArea txtresultado = new TextArea();
+		txtresultado.setBounds(10, 296, 569, 98);
+		contentPane.add(txtresultado);
+		
+		
 		JLabel lblIngreseElTipo = new JLabel("> Ingrese el tipo de Canci\u00F3n");
 		lblIngreseElTipo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblIngreseElTipo.setBounds(121, 73, 192, 30);
@@ -76,62 +87,173 @@ public class Menu extends JFrame {
 		lblIngreseElId.setBounds(121, 237, 135, 17);
 		contentPane.add(lblIngreseElId);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField.setBounds(317, 78, 119, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txttipo = new JTextField();
+		txttipo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txttipo.setBounds(323, 78, 119, 20);
+		contentPane.add(txttipo);
+		txttipo.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField_1.setBounds(260, 114, 122, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtcancion = new JTextField();
+		txtcancion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtcancion.setBounds(262, 114, 122, 20);
+		contentPane.add(txtcancion);
+		txtcancion.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField_2.setBounds(250, 152, 119, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtalbum = new JTextField();
+		txtalbum.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtalbum.setBounds(262, 152, 119, 20);
+		contentPane.add(txtalbum);
+		txtalbum.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField_3.setBounds(250, 190, 119, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtautor = new JTextField();
+		txtautor.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtautor.setBounds(250, 190, 119, 20);
+		contentPane.add(txtautor);
+		txtautor.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField_4.setBounds(250, 235, 119, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtid = new JTextField();
+		txtid.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtid.setBounds(250, 235, 119, 20);
+		contentPane.add(txtid);
+		txtid.setColumns(10);
 		
 		JButton btnIngresarNodoAdelante = new JButton("Ingresar Nodo Adelante ");
+		btnIngresarNodoAdelante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnIngresarNodoAdelante.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				if(txtid.getText().isEmpty()||txtcancion.getText().isEmpty()||txtalbum.getText().isEmpty()||txtautor.getText().isEmpty()||txttipo.getText().isEmpty())
+				{
+				JOptionPane.showMessageDialog(null, "Campos Vacios");
+				
+			}
+			else
+			{
+				musica nuevo=new musica();
+				nuevo.setId(txtid.getText());
+				nuevo.setGenero(txttipo.getText());
+				nuevo.setAlbum(txtalbum.getText());
+				nuevo.setArtista(txtautor.getText());
+				
+				
+				ld.insertarnodoadelante(nuevo);
+				JOptionPane.showMessageDialog(null, "Valor Agregado");
+				
+			
+				
+			}
+			}
+				
+			
+		});
 		btnIngresarNodoAdelante.setFont(new Font("Arial", Font.BOLD, 11));
 		btnIngresarNodoAdelante.setBounds(10, 427, 188, 23);
 		contentPane.add(btnIngresarNodoAdelante);
 		
 		JButton btnInsertarNodoAtras = new JButton("Insertar Nodo Atras");
+		btnInsertarNodoAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txtid.getText().isEmpty()||txtcancion.getText().isEmpty()||txtalbum.getText().isEmpty()||txtautor.getText().isEmpty()||txttipo.getText().isEmpty())
+				{
+				JOptionPane.showMessageDialog(null, "Campos Vacios");
+				
+			}
+			else
+			{
+				musica nuevo=new musica();
+				nuevo.setId(txtid.getText());
+				nuevo.setGenero(txttipo.getText());
+				nuevo.setAlbum(txtalbum.getText());
+				nuevo.setArtista(txtautor.getText());
+			
+				
+				ld.insertaratras(nuevo);
+				JOptionPane.showMessageDialog(null, "VALOR INGRESADO");
+				
+			
+				
+			}
+			}
+		});
 		btnInsertarNodoAtras.setFont(new Font("Arial", Font.BOLD, 11));
 		btnInsertarNodoAtras.setBounds(230, 427, 152, 23);
 		contentPane.add(btnInsertarNodoAtras);
 		
 		JButton btnEliminarPrimerNodo = new JButton("Eliminar Primer Nodo");
+		btnEliminarPrimerNodo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				int x= JOptionPane.showConfirmDialog(null, "Desea Eliminar este Valor de la primera Posicion");
+				if(JOptionPane.YES_OPTION==x)
+				{
+					ld.eliminarprimer();
+					JOptionPane.showMessageDialog(null, "Valor eliminado de la Primera Posicion");
+					txtresultado.setText("");
+					
+					
+				}
+			}
+		});
 		btnEliminarPrimerNodo.setFont(new Font("Arial", Font.BOLD, 11));
 		btnEliminarPrimerNodo.setBounds(420, 427, 165, 23);
 		contentPane.add(btnEliminarPrimerNodo);
 		
 		JButton btnRecorridoHaciaAdelante = new JButton("Recorrido hacia Adelante ");
+		btnRecorridoHaciaAdelante.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				txtresultado.setText(ld.recorrerhaciaadelante().toString());
+			}
+		});
 		btnRecorridoHaciaAdelante.setFont(new Font("Arial", Font.BOLD, 11));
 		btnRecorridoHaciaAdelante.setBounds(10, 476, 181, 23);
 		contentPane.add(btnRecorridoHaciaAdelante);
 		
 		JButton btnRecorridoHaciaAtras = new JButton("Recorrido hacia Atras ");
+		btnRecorridoHaciaAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnRecorridoHaciaAtras.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent arg0)
+			{
+				txtresultado.setText(ld.recorrerhaciaatras().toString());
+				
+			}
+		});
 		btnRecorridoHaciaAtras.setFont(new Font("Arial", Font.BOLD, 11));
-		btnRecorridoHaciaAtras.setBounds(230, 476, 165, 23);
+		btnRecorridoHaciaAtras.setBounds(217, 476, 165, 23);
 		contentPane.add(btnRecorridoHaciaAtras);
 		
 		JButton btnEliminarUltimoNodo = new JButton("Eliminar Ultimo Nodo");
+		btnEliminarUltimoNodo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				int x= JOptionPane.showConfirmDialog(null, "Desea Eliminar este Valor de la primera Posicion");
+				if(JOptionPane.YES_OPTION==x)
+				{
+					ld.eliminarultimo();
+					JOptionPane.showMessageDialog(null, "Valor eliminado de la Ultima Posicion");
+					txtresultado.setText("");
+										
+				}				
+				
+				
+				
+				
+			}
+		});
 		btnEliminarUltimoNodo.setFont(new Font("Arial", Font.BOLD, 11));
 		btnEliminarUltimoNodo.setBounds(420, 476, 165, 23);
 		contentPane.add(btnEliminarUltimoNodo);
@@ -151,14 +273,25 @@ public class Menu extends JFrame {
 		label_1.setBounds(10, 39, 547, 14);
 		contentPane.add(label_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(26, 283, 523, 105);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(64, 39, 46, 14);
+		contentPane.add(label_2);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setIcon(new ImageIcon("C:\\Users\\migue\\git\\Unidad2_EstrucuturaDeDatos\\2_Unidad_EstructuradeDatos\\Imagenes\\00-linea-separadora2.png"));
+		label_4.setBounds(37, 48, 520, 14);
+		contentPane.add(label_4);
+		
+		JLabel txtarea = new JLabel("");
+		txtarea.setIcon(new ImageIcon("C:\\Users\\migue\\git\\Unidad2_EstrucuturaDeDatos\\2_Unidad_EstructuradeDatos\\Imagenes\\12_bg_Modified.jpg"));
+		txtarea.setBounds(0, 0, 595, 551);
+		contentPane.add(txtarea);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("C:\\Users\\migue\\workspace\\2_Unidad_EstructuradeDatos\\Imagenes\\12_bg_Modified.jpg"));
 		label.setBounds(0, 0, 595, 565);
 		contentPane.add(label);
+		
+	
 	}
 }

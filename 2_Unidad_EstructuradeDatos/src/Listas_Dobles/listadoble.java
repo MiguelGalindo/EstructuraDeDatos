@@ -12,31 +12,8 @@ public class listadoble
 		fin=null;
 		
 	}
-
-
-	public NodoDoble getInicio() {
-		return inicio;
-	}
-
-
-	public void setInicio(NodoDoble inicio) {
-		this.inicio = inicio;
-	}
-
-
-	public NodoDoble getFin() {
-		return fin;
-	}
-
-
-	public void setFin(NodoDoble fin) {
-		this.fin = fin;
-	}
 	
-	public void insertarnodoadelante()
-	{
-		
-	}
+
 
 	public void insertarnodoadelante(musica valor)
 	{
@@ -48,7 +25,7 @@ public class listadoble
 		}
 		else
 		{
-			NodoDoble nuevo=new NodoDoble (valor, null,null);
+			NodoDoble nuevo=new NodoDoble (valor, null, inicio);
 			inicio.setAnterior(nuevo);
 			inicio=nuevo;
 			
@@ -68,7 +45,7 @@ public class listadoble
 		}
 	}
 	
-	public void insertarnodoatras (musica valor)
+	public void insertaratras (musica valor)
 	{
 		if(fin==null)
 		{
@@ -79,9 +56,83 @@ public class listadoble
 		else
 		{
 			NodoDoble nuevo=new NodoDoble(valor,fin,null);
-			fin.setAnterior(nuevo);
+			fin.setSiguiente(nuevo);
 			fin=nuevo;
 		}
 	}
+	
+	public musica eliminarprimer ()
+	{
+		musica nuevo=inicio.getValor();
+		inicio=inicio.getSiguiente();
+		
+		if(inicio!=null)
+		{
+			inicio.setAnterior(null);
+		
+		}
+		else
+		{
+			fin=null;
+		}
+		
+		return nuevo;
+	}
+	
+	public musica eliminarultimo ()
+	{
+		musica nuevo=fin.getValor();
+		fin=fin.getAnterior();
+		
+		if(fin!=null)
+		{
+			fin.setAnterior(null);
+		
+		}
+		else
+		{
+			inicio=null;
+		}
+		
+		return nuevo;
+	}
+
+		public StringBuilder recorrerhaciaatras()
+		{
+			StringBuilder cadena = new StringBuilder();
+			NodoDoble temporal=fin;
+			cadena.append("NULL <-----");
+			while(temporal !=null)
+			{
+				cadena.append(temporal.getValor());
+				cadena.append("<------->");
+				temporal=temporal.getAnterior();
+				
+			}
+			
+			cadena.append("NULL");
+			return cadena;
+		}
+			
+			public StringBuilder recorrerhaciaadelante()
+			{
+				StringBuilder cadena = new StringBuilder();
+				NodoDoble temporal=inicio;
+				cadena.append("NULL ----->");
+				while(temporal!=null)
+				{
+					cadena.append(temporal.getValor());
+					cadena.append("<-------->");
+					temporal=temporal.getSiguiente();
+					
+				}
+				
+				cadena.append("NULL");
+				return cadena;
+				
+			}
+			
+				
+	
 	
 }

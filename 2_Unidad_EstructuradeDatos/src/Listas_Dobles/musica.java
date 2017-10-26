@@ -36,13 +36,13 @@ public class musica
 	@Override
 	public String toString()
 	{
-		return "Identificador: "+this.id+" "+" Artista: "+this.artista+" "+" Genero: "+this.genero+" Tipo: "+"Album: "+this.album;
+		return "Identificador: "+id+" "+" Artista: "+artista+" "+" Genero: "+genero+" Tipo: "+"Album: "+album;
 	}
 	
 	public int compareTo(Object o)
 	{
-		NodoDoble temporal=(NodoDoble ) o;
-		return this.id.compareTo(temporal.getid());
+		musica temporal=(musica ) o;
+		return this.id.compareTo(temporal.getId());
 	}
 	
 	
